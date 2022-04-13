@@ -17,6 +17,7 @@ x: all
 
 clean: 
 	rm -rf $(OBJECTS)
+	rm -rf *.o
 
 
 superclean: clean
