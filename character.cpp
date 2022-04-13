@@ -2,11 +2,11 @@
 
 using namespace std;
 
-Character::Character() : m_life(100), m_mana(100), m_weaponName("Rusty sword"), m_weaponDamage(10)
+Character::Character() : m_life(100), m_mana(100), m_weapon("Rusty sword", 10)
 {
 }
 
-Character::Character(string weaponName, int weaponDamage) : m_life(100), m_mana(100), m_weaponName(weaponName), m_weaponDamage(weaponDamage)
+Character::Character(string weaponName, int weaponDamage) : m_life(100), m_mana(100), m_weapon(weaponName, weaponDamage)
 {
 }
 
@@ -26,7 +26,7 @@ void Character::receiveDamage(int nbDamage)
 
 void Character::attack(Character &target)
 {
-	target.receiveDamage(m_weaponDamage);
+	target.receiveDamage(m_weapon.getDamage());
 }
 
 void Character::drinkLifePotion(int potion)
@@ -41,11 +41,18 @@ void Character::drinkLifePotion(int potion)
 
 void Character::changeWeapon(string name, int damage)
 {
-	m_weaponName = name;
-	m_weaponDamage = damage;
+	m_weapon.change(name, damage);
 }
 
 bool Character::isAlive() const
 {
 	return (m_life > 0);
+}
+
+
+void Character::printState() const 
+{
+	cout << "\tLife: " << m_life << endl;
+	cout << "\tMana: " << m_mana << endl;
+	m_weapon.print();
 }

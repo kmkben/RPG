@@ -18,12 +18,13 @@ class Character
 		void drinkLifePotion(int);
 		void changeWeapon(std::string, int);
 		bool isAlive() const;
+		void printState() const;
 
 
 	private:
 		int m_life;
 		int m_mana;
-		Weapon *m_weapon;
+		Weapon m_weapon;
 		//std::string m_weaponName;
 		//int m_weaponDamage;
 };

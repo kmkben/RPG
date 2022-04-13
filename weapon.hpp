@@ -11,7 +11,13 @@ class Weapon
 	public:
 		Weapon();
 		Weapon(std::string, int);
-		change(std::string, int);
+		void change(std::string, int);
+
+		std::string getName() const;
+		void setName(std::string);
+		int getDamage() const;
+		void setDamage(int );
+
 		void print() const;
 
 
