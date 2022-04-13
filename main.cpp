@@ -15,5 +15,13 @@ int main()
 	emkay.changeWeapon("Double axe Venomous of death", 40);
 	emkay.attack(kwaito);
 
+	cout << "Emkay" << endl;
+	emkay.printState();
+	cout << endl;
+
+	cout << "Kwaito" << endl;
+	kwaito.printState();
+	cout << endl;
+
 	return 0;
 }

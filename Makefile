@@ -4,7 +4,7 @@ TARGET   =  rpg
 #LIBS     =  $(shell sdl-config --libs) -lGL -lGLU -lglut -lm
 
 all: $(OBJECTS)
-	g++ -o $(TARGET) $(OBJECTS) #$LIBS
+	g++ -o $(TARGET) $(OBJECTS) #LIBS
 
 
 %o: %cpp

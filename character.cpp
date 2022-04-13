@@ -54,5 +54,6 @@ void Character::printState() const
 {
 	cout << "\tLife: " << m_life << endl;
 	cout << "\tMana: " << m_mana << endl;
+	cout << "\t";
 	m_weapon.print();
 }

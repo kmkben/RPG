@@ -40,5 +40,5 @@ void Weapon::setDamage(int damage)
 
 void Weapon::print() const
 {
-	cout << "Weapon: " << m_name << "Damages: " << m_damage << ")" << endl;
+	cout << "Weapon: " << m_name << " (Damages: " << m_damage << ")" << endl;
 }
