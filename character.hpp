@@ -11,17 +11,23 @@ class Character
 {
 	public:
 		Character();
-		Character(std::string, int);
+		Character(std::string);
+		Character(std::string, std::string, int);
 		~Character();
 		void receiveDamage(int);
 		void attack(Character& );
+		void magicalAttack(Character&);
 		void drinkLifePotion(int);
 		void changeWeapon(std::string, int);
 		bool isAlive() const;
 		void printState() const;
 
+		std::string getName() const;
+		void setName(std::string);
+
 
 	private:
+		std::string m_name;
 		int m_life;
 		int m_mana;
 		Weapon m_weapon;

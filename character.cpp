@@ -2,11 +2,15 @@
 
 using namespace std;
 
-Character::Character() : m_life(100), m_mana(100), m_weapon("Rusty sword", 10)
+Character::Character() : m_name("No Name"), m_life(100), m_mana(100), m_weapon("Rusty Sword", 10)
 {
 }
 
-Character::Character(string weaponName, int weaponDamage) : m_life(100), m_mana(100), m_weapon(weaponName, weaponDamage)
+Character::Character(string name) : m_name(name), m_life(100), m_mana(100), m_weapon("Rusty sword", 10)
+{
+}
+
+Character::Character(string name, string weaponName, int weaponDamage) : m_name(name), m_life(100), m_mana(100), m_weapon(weaponName, weaponDamage)
 {
 }
 
@@ -16,32 +20,77 @@ Character::~Character()
 
 void Character::receiveDamage(int nbDamage)
 {
+	cout << m_name << " suffers " << nbDamage << " points of damage" << endl;
+
 	m_life -= nbDamage;
 
 	if (m_life < 0)
 	{
 		m_life = 0;
+		cout << m_name << " is dead.\n" << endl;
+	}
+	else
+	{
+		cout << m_name << " has " << m_life << " point of life.\n" << endl;
 	}
 }
 
 void Character::attack(Character &target)
 {
+	cout << m_name << " attaks " << target.getName() << "\n" << endl;
+
 	target.receiveDamage(m_weapon.getDamage());
+}
+
+void Character::magicalAttack(Character &target)
+{
+	if (m_mana > 0)
+	{
+		const int mana = 10;
+		cout << m_name << " attack " << target.getName() << ".\n" << endl;
+		
+		if (m_mana > 10)
+			target.receiveDamage(mana);
+		else 
+			target.receiveDamage(m_mana);
+
+		m_mana -= mana;
+
+		if (m_mana < 0)
+		{
+			m_mana = 0;
+
+			cout << m_name << " doesn't have any Mana. So you can't anymore attack magically in the future.\n" << endl;
+		}
+
+	}
+	else
+	{
+		cout << "You don't have any Mana so you can't attack magically\n" << endl;
+	}
 }
 
 void Character::drinkLifePotion(int potion)
 {
+	cout << m_name << " drinks a potion for " << potion << " point of life." << endl;
+
 	m_life += potion;
 
 	if (m_life > 100)
 	{
 		m_life = 100;
 	}
+
+	cout << m_name << " has " << m_life << " point of life.\n" << endl;
 }
 
 void Character::changeWeapon(string name, int damage)
 {
+	cout << m_name << " change weapon to : " << endl;
 	m_weapon.change(name, damage);
+	cout << "\t" ;
+	m_weapon.print();
+	cout << "\n" << endl;
 }
 
 bool Character::isAlive() const
@@ -49,11 +98,25 @@ bool Character::isAlive() const
 	return (m_life > 0);
 }
 
+string Character::getName() const
+{
+	return m_name;
+}
+
+void Character::setName(string name)
+{
+	m_name = name;
+}
+
 
 void Character::printState() const 
 {
+	cout << "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+	cout << m_name << endl;
+	cout << "---------------------" << endl;
 	cout << "\tLife: " << m_life << endl;
 	cout << "\tMana: " << m_mana << endl;
 	cout << "\t";
 	m_weapon.print();
+	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" << endl;
 }
