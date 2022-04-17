@@ -13,7 +13,12 @@ class Character
 		Character();
 		Character(std::string);
 		Character(std::string, std::string, int);
+		Character(Character const&);
+		
 		~Character();
+
+		Character& operator=(Character const&);
+
 		void receiveDamage(int);
 		void attack(Character& );
 		void magicalAttack(Character&);
@@ -30,7 +35,7 @@ class Character
 		std::string m_name;
 		int m_life;
 		int m_mana;
-		Weapon m_weapon;
+		Weapon *m_weapon;
 		//std::string m_weaponName;
 		//int m_weaponDamage;
 };

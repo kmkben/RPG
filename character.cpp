@@ -2,20 +2,46 @@
 
 using namespace std;
 
-Character::Character() : m_name("No Name"), m_life(100), m_mana(100), m_weapon("Rusty Sword", 10)
+Character::Character() : m_name("No Name"), m_life(100), m_mana(100), m_weapon(nullptr)
 {
+	m_weapon = new Weapon(); 
 }
 
-Character::Character(string name) : m_name(name), m_life(100), m_mana(100), m_weapon("Rusty sword", 10)
+Character::Character(string name) : m_name(name), m_life(100), m_mana(100), m_weapon(nullptr)
 {
+	m_weapon = new Weapon("Rusty Sword", 10);
 }
 
-Character::Character(string name, string weaponName, int weaponDamage) : m_name(name), m_life(100), m_mana(100), m_weapon(weaponName, weaponDamage)
+Character::Character(string name, string weaponName, int weaponDamage) : m_name(name), m_life(100), m_mana(100), m_weapon(nullptr) 
 {
+	m_weapon = new Weapon(weaponName, weaponDamage);
+
+}
+
+Character::Character(Character const& character) : m_name(character.m_name), m_life(character.m_life), m_mana(character.m_mana), m_weapon(nullptr)
+{
+	m_weapon = new Weapon(*(character.m_weapon));		
 }
 
 Character::~Character()
 {
+	delete m_weapon;
+}
+
+Character& Character::operator=(Character const& character)
+{
+	if(this != &character)
+	{
+		m_name = character.m_name;
+		m_life = character.m_life;
+		m_mana = character.m_mana;
+
+		delete m_weapon;
+
+		m_weapon = new Weapon(*(character.m_weapon));
+	}
+
+	return *this;
 }
 
 void Character::receiveDamage(int nbDamage)
@@ -39,7 +65,7 @@ void Character::attack(Character &target)
 {
 	cout << m_name << " attaks " << target.getName() << "\n" << endl;
 
-	target.receiveDamage(m_weapon.getDamage());
+	target.receiveDamage(m_weapon->getDamage());
 }
 
 void Character::magicalAttack(Character &target)
@@ -87,9 +113,9 @@ void Character::drinkLifePotion(int potion)
 void Character::changeWeapon(string name, int damage)
 {
 	cout << m_name << " change weapon to : " << endl;
-	m_weapon.change(name, damage);
+	m_weapon->change(name, damage);
 	cout << "\t" ;
-	m_weapon.print();
+	m_weapon->print();
 	cout << "\n" << endl;
 }
 
@@ -117,6 +143,6 @@ void Character::printState() const
 	cout << "\tLife: " << m_life << endl;
 	cout << "\tMana: " << m_mana << endl;
 	cout << "\t";
-	m_weapon.print();
+	m_weapon->print();
 	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" << endl;
 }
