@@ -1,4 +1,4 @@
-SOURCES  =  main.cpp character.cpp weapon.cpp
+SOURCES  =  main.cpp character.cpp weapon.cpp warrior.cpp magician.cpp
 OBJECTS  =  $(SOURCES:.cpp=.o)
 TARGET   =  rpg
 #LIBS     =  $(shell sdl-config --libs) -lGL -lGLU -lglut -lm

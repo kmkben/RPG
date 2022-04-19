@@ -21,23 +21,26 @@ class Character
 
 		void receiveDamage(int);
 		void attack(Character& );
-		void magicalAttack(Character&);
+		void punch(Character& ) const;
+
 		void drinkLifePotion(int);
+
 		void changeWeapon(std::string, int);
+
 		bool isAlive() const;
 		void printState() const;
+
+		void introduceYourself() const;
 
 		std::string getName() const;
 		void setName(std::string);
 
 
-	private:
+	protected:
 		std::string m_name;
 		int m_life;
-		int m_mana;
+		//int m_mana;
 		Weapon *m_weapon;
-		//std::string m_weaponName;
-		//int m_weaponDamage;
 };
 
 

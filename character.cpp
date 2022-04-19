@@ -2,23 +2,23 @@
 
 using namespace std;
 
-Character::Character() : m_name("No Name"), m_life(100), m_mana(100), m_weapon(nullptr)
+Character::Character() : m_name("No Name"), m_life(100), m_weapon(nullptr)
 {
 	m_weapon = new Weapon(); 
 }
 
-Character::Character(string name) : m_name(name), m_life(100), m_mana(100), m_weapon(nullptr)
+Character::Character(string name) : m_name(name), m_life(100), m_weapon(nullptr)
 {
 	m_weapon = new Weapon("Rusty Sword", 10);
 }
 
-Character::Character(string name, string weaponName, int weaponDamage) : m_name(name), m_life(100), m_mana(100), m_weapon(nullptr) 
+Character::Character(string name, string weaponName, int weaponDamage) : m_name(name), m_life(100), m_weapon(nullptr) 
 {
 	m_weapon = new Weapon(weaponName, weaponDamage);
 
 }
 
-Character::Character(Character const& character) : m_name(character.m_name), m_life(character.m_life), m_mana(character.m_mana), m_weapon(nullptr)
+Character::Character(Character const& character) : m_name(character.m_name), m_life(character.m_life), m_weapon(nullptr)
 {
 	m_weapon = new Weapon(*(character.m_weapon));		
 }
@@ -34,7 +34,7 @@ Character& Character::operator=(Character const& character)
 	{
 		m_name = character.m_name;
 		m_life = character.m_life;
-		m_mana = character.m_mana;
+		//m_mana = character.m_mana;
 
 		delete m_weapon;
 
@@ -68,7 +68,7 @@ void Character::attack(Character &target)
 	target.receiveDamage(m_weapon->getDamage());
 }
 
-void Character::magicalAttack(Character &target)
+/*void Character::magicalAttack(Character &target)
 {
 	if (m_mana > 0)
 	{
@@ -94,6 +94,13 @@ void Character::magicalAttack(Character &target)
 	{
 		cout << "You don't have any Mana so you can't attack magically\n" << endl;
 	}
+}*/
+
+void Character::punch(Character &target) const 
+{
+	cout << m_name << " is punching " << target.getName() << "\n" << endl;
+
+	target.receiveDamage(10);
 }
 
 void Character::drinkLifePotion(int potion)
@@ -141,8 +148,16 @@ void Character::printState() const
 	cout << m_name << endl;
 	cout << "---------------------" << endl;
 	cout << "\tLife: " << m_life << endl;
-	cout << "\tMana: " << m_mana << endl;
+	//cout << "\tMana: " << m_mana << endl;
 	cout << "\t";
 	m_weapon->print();
 	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" << endl;
+}
+
+void Character::introduceYourself() const
+{
+	cout << "--------------------------------------------------" << endl;
+	cout << "I am " << m_name << "." << endl;
+	cout << "I still have " << m_life << " points of life.a" << endl;
+	//cout << "--------------------------------------------------" << endl;
 }
